@@ -1,17 +1,11 @@
 # 🅱️isualization Tool in Keras for Facial Expression Recognition
 
-### Contents:
-- Description
-- Setup
-- Usage
-- License
-
-## Description
+### Description
 
 The present repo contains a Python tool-script to run a neural network visualize a facial expression recognizer in realtime.
 
 
-## Setup
+### Setup
 
 The packages needed are the following:
 
@@ -41,7 +35,7 @@ source deactivate
 ```
 
 
-## Usage
+### Usage
 
 
-## License
+### License
