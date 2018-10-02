@@ -3,7 +3,7 @@
 
 The present repo contains a Python tool-script to run a neural network visualize a facial expression recognizer in realtime.
 
-
+The repo includes a pre-trained model for facial expression recognition.
 
 ## Setup
 
@@ -73,7 +73,7 @@ An example (using some flags) to run the pre-trained network included in this re
 
 ## License
 
-MIT License
+**MIT License**
 
 Copyright (c) 2018 Rodolfo Ferro
 
