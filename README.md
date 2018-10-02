@@ -12,7 +12,7 @@ The packages needed are the following:
 - [SciPy](https://www.scipy.org/)
 - [Numpy](http://www.numpy.org/)
 - [OpenCV](https://opencv.org/)
-- [Keras](https://keras.io/)
+- [Keras](https://keras.io/) (with [Tensorflow](https://www.tensorflow.org/))
 
 The easiest way to install them is by using the `conda env` included in this repo. To do so, just be sure to have [Anaconda](https://www.anaconda.com/download/) installed and run the following:
 ```bash
