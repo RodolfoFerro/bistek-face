@@ -6,6 +6,7 @@ dependencies:
   - python>=3.6
   - scipy
   - numpy
+  - opencv
   - tensorflow>=1.9.0
   - tensorboard
   - tensorflow-hub
