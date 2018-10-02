@@ -63,5 +63,12 @@ optional arguments:
                         Path to custom weights in Keras' h5 format.
 ```
 
+With this, you can specify any path to any of the files to be used, or specify the resizing of the images to be processed by the neural net.
+
+An example (using some flags) to run the pre-trained network included in this repo would be the following:
+```bash
+(bistek) python main.py -c "classes.txt" -rs 48 -m "./models/base_model.json" -w "./models/base_model.h5"
+```
+
 
 ## License
