@@ -13,6 +13,7 @@
 
 
 from keras.models import model_from_json
+from time import time
 import numpy as np
 import argparse
 import cv2
@@ -88,6 +89,7 @@ def viewer():
         frame = cv2.resize(frame, (640, 360))
 
         # Our operations on the frame come here:
+        start_face_detection = time()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         for i, (x, y, w, h) in enumerate(faces):
@@ -98,10 +100,17 @@ def viewer():
             cv2.rectangle(frame, (x - w // 32, y),
                           (x + 33 * w // 32, y + 17 * h // 16),
                           (250, 150, 10), 2)
+            end_face_detection = time()
+            delta_face = end_face_detection - start_face_detection
+            print("Time for face {}: {}".format(i, delta_face))
             try:
-                cv2.imshow('Mini input face %d' % i, face)
+                # cv2.imshow('Mini input face %d' % i, face)
                 face = np.expand_dims(face, axis=0)
+                start_prediction = time()
                 prediction = np.argmax(model.predict(face))
+                end_prediction = time()
+                delta_prediction = end_prediction - start_prediction
+                print("Time for prediction: {}".format(delta_prediction))
                 for emotion, class_id in classes.items():
                     if class_id == prediction:
                         cv2.putText(frame, "Emotion: " + emotion.title(),
