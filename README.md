@@ -45,7 +45,7 @@ This outputs the following:
 ```
 Using TensorFlow backend.
 usage: main.py [-h] [-c CLASSES] [-hc HAAR] [-hcp HAARPATH] [-rs RESIZING]
-               [-m MODEL] [-w WEIGHTS]
+               [-fs RESIZING] [-m MODEL] [-w WEIGHTS]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -57,6 +57,10 @@ optional arguments:
                         Path to Haar cascades for face detection.
   -rs RESIZING, --resizing RESIZING
                         Image width for resizing.
+  -fs FRAMESIZE, --framesize FRAMESIZE
+                        Set frame size:
+                         (1) 640x360
+                         (2) 320x180
   -m MODEL, --model MODEL
                         Path to custom model in Keras' json format.
   -w WEIGHTS, --weights WEIGHTS
@@ -67,7 +71,7 @@ With this, you can specify any path to any of the files to be used, or specify t
 
 An example (using some flags) to run the pre-trained network included in this repo would be the following:
 ```bash
-(bistek) python main.py -c "classes.txt" -rs 48 -m "./models/base_model.json" -w "./models/base_model.h5"
+(bistek) python main.py -c "classes.txt" -rs 48 -fs 2 -m "./models/base_model.json" -w "./models/base_model.h5"
 ```
 
 

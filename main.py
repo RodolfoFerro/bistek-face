@@ -13,11 +13,30 @@
 
 
 from keras.models import model_from_json
-from time import time
 import numpy as np
-import argparse
 import cv2
+
 import re
+import os
+import psutil
+import argparse
+from time import time
+
+
+# Get current Process ID:
+pid = os.getpid()
+
+def get_memory_status(pid):
+    """Memory getter function."""
+
+    # Build psutil process from PID:
+    p = psutil.Process(pid)
+    print(" * Process ID:", pid)
+
+    # Print memory status:
+    mem_usage = p.memory_percent()
+    print(" * Memory {:.4f}%".format(mem_usage))
+    print()
 
 
 def parser():
@@ -37,6 +56,9 @@ def parser():
     ap.add_argument("-rs", "--resizing", type=int,
                     default=48,
                     help="Image width for resizing.")
+    ap.add_argument("-fs", "--framesize", type=int,
+                    default=1,
+                    help="Set frame size: \n (1) 640x360 \n (2) (320x180)")
     ap.add_argument("-m", "--model", type=str,
                     default="./models/base_model.json",
                     help="Path to custom model in Keras' json format.")
@@ -86,7 +108,12 @@ def viewer():
     while(True):
         # Capture frame-by-frame:
         ret, frame = cap.read()
-        frame = cv2.resize(frame, (640, 360))
+        if frame_size == 1:
+            frame = cv2.resize(frame, (640, 360))
+        if frame_size == 2:
+            frame = cv2.resize(frame, (320, 180))
+        else:
+            frame = cv2.resize(frame, (160, 90))
 
         # Our operations on the frame come here:
         start_face_detection = time()
@@ -102,7 +129,7 @@ def viewer():
                           (250, 150, 10), 2)
             end_face_detection = time()
             delta_face = end_face_detection - start_face_detection
-            print("Time for face {}: {}".format(i, delta_face))
+            print(" * Time for face {}: {}".format(i, delta_face))
             try:
                 # cv2.imshow('Mini input face %d' % i, face)
                 face = np.expand_dims(face, axis=0)
@@ -110,7 +137,8 @@ def viewer():
                 prediction = np.argmax(model.predict(face))
                 end_prediction = time()
                 delta_prediction = end_prediction - start_prediction
-                print("Time for prediction: {}".format(delta_prediction))
+                print(" * Time for prediction: {}".format(delta_prediction))
+                get_memory_status(pid)
                 for emotion, class_id in classes.items():
                     if class_id == prediction:
                         cv2.putText(frame, "Emotion: " + emotion.title(),
@@ -139,6 +167,7 @@ if __name__ == '__main__':
 
     # Extra meta data:
     img_size = args['resizing']
+    frame_size = args['framesize']
 
     # Initialize videocapture:
     cap = cv2.VideoCapture(0)
