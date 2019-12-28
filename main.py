@@ -144,6 +144,7 @@ def viewer():
                         cv2.putText(frame, "Emotion: " + emotion.title(),
                                     (x + 5, y - 10), 0, w/350, (150, 255, 10),
                                     1, cv2.LINE_AA)
+                        print(" * Emotion: {}".format(emotion.title()))
                         break
                 # print(emotion)
             except Exception as e:
