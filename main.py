@@ -57,7 +57,7 @@ def parser():
                     default=48,
                     help="Image width for resizing.")
     ap.add_argument("-fs", "--framesize", type=int,
-                    default=1,
+                    default=-1,
                     help="Set frame size: \n (1) 640x360 \n (2) (320x180)")
     ap.add_argument("-m", "--model", type=str,
                     default="./models/base_model.json",
@@ -102,15 +102,15 @@ def model_loader(architecture, weights):
     return model
 
 
-def viewer():
+def viewer(fs):
     """FER viewer."""
 
     while(True):
         # Capture frame-by-frame:
         ret, frame = cap.read()
-        if frame_size == 1:
+        if fs == 1:
             frame = cv2.resize(frame, (640, 360))
-        if frame_size == 2:
+        if fs == 2:
             frame = cv2.resize(frame, (320, 180))
         else:
             frame = cv2.resize(frame, (160, 90))
@@ -176,4 +176,4 @@ if __name__ == '__main__':
     face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
     # Viewer:
-    viewer()
+    viewer(frame_size)
