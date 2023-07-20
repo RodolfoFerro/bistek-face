@@ -1,7 +1,7 @@
 # ============================================================================
 # Author: Rodolfo Ferro Pérez
 # Email: ferro@cimat.mx
-# Twitter: @FerroRodolfo
+# Twitter: @rodo_ferro
 #
 # Script: Script to view classifier in action.
 #
